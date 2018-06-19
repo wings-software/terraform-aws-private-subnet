@@ -1,18 +1,18 @@
 resource "aws_eip" "nat_eip" {
   vpc  = true
-  tags = "${merge(map("Name", "${var.subnet_name}"), var.resource_tags)}"
+  tags = "${merge(map("Name", "${var.network_name}-private"), var.resource_tags)}"
 }
 
 resource "aws_nat_gateway" "nat_gw" {
   allocation_id = "${aws_eip.nat_eip.id}"
   subnet_id     = "${var.public_subnet_id}"
-  tags          = "${merge(map("Name", "${var.subnet_name}"), var.resource_tags)}"
+  tags          = "${merge(map("Name", "${var.network_name}-private"), var.resource_tags)}"
 }
 
 # for each of the private ranges, create a "private" route table.
 resource "aws_route_table" "private" {
   vpc_id = "${var.vpc_id}"
-  tags   = "${merge(map("Name", "${var.subnet_name}"), var.resource_tags)}"
+  tags   = "${merge(map("Name", "${var.network_name}-private"), var.resource_tags)}"
 }
 
 # add a nat gateway to each private subnet's route table

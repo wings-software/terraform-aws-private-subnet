@@ -1,8 +1,3 @@
-variable "subnet_name" {
-  description = "Name of the Subnet"
-  type        = "string"
-}
-
 variable "vpc_id" {
   description = "VPC ID as assigned by AWS"
   type        = "string"
@@ -36,7 +31,7 @@ variable "resource_tags" {
   default     = {}
 }
 
-variable "cluster_name" {
+variable "network_name" {
   description = "All ec2 instances that are spun up in this subnet should be associated through having a common purpose. This is a name that specifies that purpose"
   type        = "string"
 }
