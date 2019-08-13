@@ -10,4 +10,5 @@ resource "aws_security_group_rule" "ssh_all_in_subnet" {
   to_port         = 22
   protocol        = "tcp"
   self = true
+  security_group_id = "${aws_security_group.admin.id}"
 }
