@@ -5,7 +5,7 @@ resource "aws_eip" "nat_eip" {
 
 resource "aws_nat_gateway" "nat_gw" {
   allocation_id = "${aws_eip.nat_eip.id}"
-  subnet_id     = "${var.public_subnet_id}"
+  subnet_id     = "${aws_subnet.subnet.id}"
   tags          = "${merge(map("Name", "${var.network_name}-private"), var.resource_tags)}"
 }
 
